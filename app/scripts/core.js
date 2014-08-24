@@ -1,4 +1,5 @@
 /* global define */
+/* jshint indent:4 */
 define(function () {
     'use strict';
 
