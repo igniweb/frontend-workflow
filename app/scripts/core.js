@@ -4,6 +4,10 @@ define(function () {
 
     var self = {};
 
+    self.init = function () {
+        console.log('Core module initialised!');
+    };
+
     console.log('Module ready');
 
     return self;
