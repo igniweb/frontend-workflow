@@ -1,5 +1,5 @@
 /* global require, Modernizr */
-require(['core'], function (core) {
+require(['core', 'ui'], function (core, ui) {
     'use strict';
 
     console.log('Core module loaded ', core);
@@ -7,4 +7,6 @@ require(['core'], function (core) {
     if (Modernizr.canvas) {
         console.log('Canvas is present!', Modernizr);
     }
+
+    ui.createUi();
 });

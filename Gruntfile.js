@@ -51,6 +51,13 @@ module.exports = function (grunt) {
                 files: ['<%= config.app %>/styles/{,*/}*.css'],
                 tasks: ['newer:copy:styles', 'autoprefixer']
             },
+            handlebars: {
+                files: ['<%= config.app %>/templates/**/*.hbs'],
+                tasks: ['handlebars'],
+                options: {
+                    livereload: true
+                }
+            },
             livereload: {
                 options: {
                     livereload: '<%= connect.options.livereload %>'
@@ -124,7 +131,8 @@ module.exports = function (grunt) {
         jshint: {
             options: {
                 jshintrc: '.jshintrc',
-                reporter: require('jshint-stylish')
+                reporter: require('jshint-stylish'),
+                ignores: '<%= config.app %>/scripts/templates.js'
             },
             all: [
                 'Gruntfile.js',
@@ -336,7 +344,8 @@ module.exports = function (grunt) {
                     baseUrl: '<%= config.app %>/scripts',
                     name: '../../bower_components/almond/almond',
                     out: '<%= config.dist %>/scripts/main.js',
-                    include: ['main']
+                    include: ['main'],
+                    mainConfigFile: '<%= config.app %>/dev-require-config.js'
                 }
             }
         },
@@ -345,6 +354,17 @@ module.exports = function (grunt) {
             dist: {
                 src: '<%= config.dist %>/index.html',
                 dest: '<%= config.dist %>/index.html'
+            }
+        },
+
+        handlebars: {
+            options: {
+                amd: true
+            },
+            all: {
+                files: {
+                    '<%= config.app %>/scripts/templates.js': '<%= config.app %>/templates/**/*.hbs'
+                }
             }
         }
     });
@@ -358,6 +378,7 @@ module.exports = function (grunt) {
         grunt.task.run([
             'clean:server',
             'concurrent:server',
+            'handlebars',
             'autoprefixer',
             'connect:livereload',
             'watch'
@@ -389,6 +410,7 @@ module.exports = function (grunt) {
         'useminPrepare',
         'concurrent:dist',
         'requirejs',
+        'handlebars',
         'autoprefixer',
         'concat',
         'cssmin',
