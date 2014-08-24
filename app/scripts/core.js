@@ -1,4 +1,4 @@
-/* global define */
+/* global define, Modernizr */
 /* jshint indent:4 */
 define(function () {
     'use strict';
@@ -10,6 +10,10 @@ define(function () {
     };
 
     console.log('Module ready');
+
+    if (Modernizr.canvas) {
+        console.log('Canvas!');
+    }
 
     return self;
 });

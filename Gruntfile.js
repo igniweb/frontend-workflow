@@ -139,7 +139,8 @@ module.exports = function (grunt) {
             test: {
                 options: {
                     specs: 'test/spec/**/*.js',
-                    template: require('grunt-template-jasmine-requirejs')
+                    template: require('grunt-template-jasmine-requirejs'),
+                    vendor: 'test/bower_components/modernizr/modernizr.js'
                 }
             }
         },
