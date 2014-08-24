@@ -327,6 +327,24 @@ module.exports = function (grunt) {
                 'imagemin',
                 'svgmin'
             ]
+        },
+
+        requirejs: {
+            compile: {
+                options: {
+                    baseUrl: '<%= config.app %>/scripts',
+                    name: '../../bower_components/almond/almond',
+                    out: '<%= config.dist %>/scripts/main.js',
+                    include: ['main']
+                }
+            }
+        },
+
+        htmlrefs: {
+            dist: {
+                src: '<%= config.dist %>/index.html',
+                dest: '<%= config.dist %>/index.html'
+            }
         }
     });
 
@@ -369,11 +387,13 @@ module.exports = function (grunt) {
         'clean:dist',
         'useminPrepare',
         'concurrent:dist',
+        'requirejs',
         'autoprefixer',
         'concat',
         'cssmin',
         'uglify',
         'copy:dist',
+        'htmlrefs:dist',
         'modernizr',
         'rev',
         'usemin',
